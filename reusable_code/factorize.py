@@ -23,7 +23,7 @@ def factorize(num, prime_bins = None):
     if not prime_bins:
         prime_bins, _ = sieve(num)
 
-    if prime_bins(num):
+    if prime_bins[num]:
         return [1,num]
     
     left_factors = [1]
@@ -31,7 +31,7 @@ def factorize(num, prime_bins = None):
     i = 2
 
     while i*i < num:
-        if num % i:
+        if num % i == 0:
             left_factors.append(i)
             right_factors = [num // i] + right_factors
 

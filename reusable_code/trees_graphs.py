@@ -36,5 +36,32 @@ def dfs(start_node, graph):
                 stack.append(neighbor)
 
 
+# takes graph in matrix notation, where graph[a,b] = weight of edge between a,b
+# if there is no edge between a,b, then the default value is -1
+def dijkstra(start_node, end_node, graph):
+    visited = np.zeros(len(graph))
+    regular_range = range(len(graph))
+
+    # initialize distance to be very large
+    distances = {i: 0 if i  == start_node else np.max(graph) * 10**10 for i in regular_range}
+    queue = [start_node]
+
+    # consider all unvisited neighbors
+    while queue:
+        current = queue.pop(0)
+        if current == end_node:
+            break
+
+        for neighbor in regular_range:
+            if visited[neighbor] == 0 and graph[current][neighbor] >= 0:
+                distances[neighbor] = min(distances[neighbor], distances[current] + graph[current][neighbor])
+                queue.append(neighbor)
+        
+        visited[current] = 1
+
+    
+    return distances[end_node]
+
+
 
 
