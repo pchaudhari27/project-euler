@@ -6,8 +6,8 @@ def prime_factorize(num, prime_bins = None, primes = None):
     if not primes:
         prime_bins, primes = sieve(num)
     
-    if prime_bins[n]:
-        return Counter([n])
+    if prime_bins[num]:
+        return Counter([num])
 
     n = num
     for p in primes:
