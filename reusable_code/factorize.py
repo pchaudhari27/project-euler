@@ -2,7 +2,7 @@ from sieve_of_eratosthenes import sieve
 from miller_rabin import miller_rabin
 
 from collections import Counter
-from itertools import produc
+from itertools import product
 
 def prime_factorize(num, prime_bins = None, primes = None):
     prime_factors = []
