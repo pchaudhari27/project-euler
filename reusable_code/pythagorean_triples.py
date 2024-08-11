@@ -2,8 +2,11 @@ from gcd_lcm import gcd
 
 # Euclid's formula
 def euclid_pythagorean(max_perimeter):
-    triples = set()
-    to_check = [(1,2)]
+    if max_perimeter < 12:
+        return []
+
+    triples = []
+    to_check = [(2, 1)]
     seen = set()
     while to_check:
         m,n = to_check.pop(0)
@@ -12,12 +15,15 @@ def euclid_pythagorean(max_perimeter):
         seen.add((m,n))
         a,b,c = m*m - n*n, 2*m*n, m*m + n*n
 
+        if a+b+c >= max_perimeter: continue
+
         # require gcd = 1 for primitive triples
-        if m > n and gcd(m,n) == 1 and (m + n) % 2 == 1 and a + b + c <= max_perimeter:
-            triples.add((a,b,c))
-            if n + 1 < m:
-                to_check.append((n+1, m))
-            to_check.append((n, m+1))
+        if gcd(m,n) == 1 and (m + n) % 2 == 1:
+            triples.append((min(a,b),max(a,b),c))
+
+        if m > n + 1:
+            to_check.append((m, n+1))
+        to_check.append((m+1, n))
 
     return triples
 
